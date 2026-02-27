@@ -7,13 +7,13 @@ export default function HeroRight() {
       <img
         src={HeroBgImage}
         alt="Hero Background"
-        className="absolute -top-10 w-full right-30 object-cover "
+        className="absolute -top-10 right-30 object-cover "
       />
 
       <div>
         <img
           alt="Professional Worker"
-          className="rounded-3xl z-1 w-full relative"
+          className="rounded-3xl z-1 w- relative"
           src={HeroImage}
         />
       </div>
@@ -21,7 +21,7 @@ export default function HeroRight() {
         <img
           src={Rectangle}
           alt="Rectangle"
-          className="absolute -bottom-10 right-0 z-2"
+          className="absolute bottom-0 right-0 z-2"
         />
       </div>
     </div>
