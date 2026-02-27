@@ -1,9 +1,12 @@
 import "./App.css";
+import Footer from "./components/layout/Footer";
+import Navbar from "./components/layout/Navbar";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl bg-red-500 font-bold text-center">QuickHire</h1>
+      <Navbar />
+      <Footer />
     </>
   );
 }
