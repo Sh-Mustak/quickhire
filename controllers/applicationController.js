@@ -36,7 +36,7 @@ exports.getApplicationById = async (req, res, next) => {
   try {
     const application = await Application.findById(req.params.id).populate(
       "job",
-      "title company location"
+      "title company location",
     );
 
     if (!application) {

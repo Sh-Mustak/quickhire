@@ -11,7 +11,15 @@ const JobSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ["Technology", "Finance", "Healthcare", "Education", "Sales", "Marketing", "Other"],
+    enum: [
+      "Technology",
+      "Finance",
+      "Healthcare",
+      "Education",
+      "Sales",
+      "Marketing",
+      "Other",
+    ],
     required: [true, "Please select a job category"],
   },
   location: String,
