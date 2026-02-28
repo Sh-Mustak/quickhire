@@ -1,4 +1,5 @@
 import "./App.css";
+import CallToActionSection from "./components/CallToActionSection/CallToActionSection";
 import HeroSection from "./components/HeroSection/HeroSection";
 import JobCategory from "./components/jobCategory/JobCategory";
 import Footer from "./components/layout/Footer";
@@ -14,6 +15,7 @@ function App() {
           <HeroSection />
           <TrustedCompany />
           <JobCategory />
+          <CallToActionSection />
       </main>
       <Footer />
     </>
