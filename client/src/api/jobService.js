@@ -1,34 +1,11 @@
-/* eslint-disable no-unused-vars */
-import { create } from "zustand";
-import { jobService } from "../api/jobService";
+import axiosInstance from "./axiosInstance";
+import { endpoints } from "./endpoints";
 
-export const useJobStore = create((set) => ({
-  jobs: [],
-  selectedJob: null,
-  loading: false,
-  error: null,
-
-  fetchJobs: async () => {
-    try {
-      set({ loading: true, error: null });
-
-      const res = await jobService.getAll();
-
-      set({ jobs: res.data, loading: false });
-    } catch (err) {
-      set({ error: "Failed to fetch jobs", loading: false });
-    }
-  },
-
-  fetchJobById: async (id) => {
-    try {
-      set({ loading: true });
-
-      const res = await jobService.getById(id);
-
-      set({ selectedJob: res.data, loading: false });
-    } catch (err) {
-      set({ error: "Failed to fetch job", loading: false });
-    }
-  },
-}));
+export const jobService = {
+  getAll: () => axiosInstance.get(endpoints.jobs),
+  getFeaturedJob: () => axiosInstance.get(endpoints.featuredJob),
+   getLatestJob: () => axiosInstance.get(endpoints.latestJob),
+  getById: (id) => axiosInstance.get(endpoints.jobById(id)),
+  create: (data) => axiosInstance.post(endpoints.jobs, data),
+  delete: (id) => axiosInstance.delete(endpoints.jobById(id)),
+};
