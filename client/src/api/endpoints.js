@@ -5,6 +5,8 @@ export const endpoints = {
     jobs: `/jobs`,
     jobById: (id) => `/jobs/${id}`,
     jobCategory: `/jobs/categories`,
+    featuredJob: `/jobs?limit=8`,
+    latestJob: `/jobs?limit=10`,
 
     // Applications
     applications: `/applications`,
