@@ -1,35 +1,24 @@
+import { useJobStore } from "../../store/job/categoryJobstore";
 import JobCard from "./JobCard";
 import SectionHeader from "./SectionHeader";
+import {useEffect} from "react"
 
 export default function JobCategory() {
+  const jobs = useJobStore((state) => state.jobs);
+  const loading = useJobStore((state) => state.loading);
+  const categoryJobs = useJobStore((state) => state.categoryJobs);
+  useEffect(()=>{
+    categoryJobs();
+  },[])
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <SectionHeader />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* <!-- Category Card --> */}
-
-          <JobCard title="Design" jobsAvailable={235} />
-          {/* <!-- Sales Card (Active Style Example) --> */}
-
-          <JobCard title="Sales" jobsAvailable={756} />
-          {/* <!-- Marketing (Primary Bg Example) --> */}
-
-          <JobCard title="Marketing" jobsAvailable={140} />
-          {/* <!-- Finance --> */}
-
-          <JobCard title="Finance" jobsAvailable={325} />
-          {/* <!-- Technology --> */}
-
-          <JobCard title="Technology" jobsAvailable={436} />
-          {/* <!-- Engineering --> */}
-          <JobCard title="Engineering" jobsAvailable={542} />
-
-          {/* <!-- Business --> */}
-          <JobCard title="Business" jobsAvailable={211} />
-
-          {/* <!-- Human Resource --> */}
-          <JobCard title="Human Resource" jobsAvailable={346} />
+          {jobs?.map((job) => (
+            <JobCard key={job._id} title={job._id} jobsAvailable={job?.count} />
+          ))}
         </div>
       </div>
     </section>
