@@ -1,7 +1,17 @@
+import { useEffect } from "react";
 import RightArrow from "../../assets/RightArrowIcon.svg";
+import { useJobStore } from "../../store/job/featuredJobStore";
+import LatestJobCardSkeleton from "../skeleton/LatestJobCardSkeleton";
 import LatestJobCard from "./LatestJobCard";
 
 export default function LatestJob() {
+  const jobs = useJobStore((state) => state.jobs);
+  const loading = useJobStore((state) => state.loading);
+  const featuredJobs = useJobStore((state) => state.featuredJobs);
+
+  useEffect(() => {
+    featuredJobs();
+  }, []);
   return (
     <section className="bg-gray-50/50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -22,8 +32,16 @@ export default function LatestJob() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <LatestJobCard />
-          <LatestJobCard />
+          {loading ? (
+            <>
+              <LatestJobCardSkeleton />
+              <LatestJobCardSkeleton />
+              <LatestJobCardSkeleton />
+              <LatestJobCardSkeleton />
+            </>
+          ) : (
+            jobs?.map((job) => <LatestJobCard key={job._id} job={job} />)
+          )}
         </div>
       </div>
     </section>
