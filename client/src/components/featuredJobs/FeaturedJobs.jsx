@@ -1,7 +1,18 @@
+/* eslint-disable no-unused-vars */
+import { useEffect } from "react";
 import Revolut from "../../assets/images/featuredJob/CompanyLogo.svg";
 import RightArrow from "../../assets/RightArrowIcon.svg";
+import { useJobStore } from "../../store/job/featuredJobStore";
 import FeaturedJobCard from "./FeaturedJobCard";
 export default function FeaturedJob() {
+  const jobs = useJobStore((state) => state.jobs);
+  const loading = useJobStore((state) => state.loading);
+  const featuredJobs = useJobStore((state) => state.featuredJobs);
+
+  useEffect(() => {
+    featuredJobs();
+  }, []);
+
   return (
     <section className="py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="max-w-7xl mx-auto">
@@ -20,102 +31,20 @@ export default function FeaturedJob() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* <FeaturedJobCard icon={Revolut} /> */}
 
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
-          <FeaturedJobCard
-            icon={Revolut}
-            title="Email Marketing"
-            company="Revolut"
-            location="Madrid, Spain"
-            description="Revolut is looking for Email Marketing..."
-            type="Full Time"
-            tags={[
-              { label: "Marketing", color: "yellow" },
-              { label: "Design", color: "green" },
-            ]}
-          />
+          {jobs?.map((job) => (
+            <FeaturedJobCard
+              key={job._id}
+              icon={job.companyLogo || Revolut} // fallback if no logo
+              title={job.title}
+              company={job.company}
+              location={job.location}
+              description={job.description}
+              type={job.type}
+              tags={[
+                { label: job.category, color: "yellow" }, // you can map category to a color
+              ]}
+            />
+          ))}
         </div>
       </div>
     </section>
